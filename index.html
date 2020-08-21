@@ -7,6 +7,28 @@
     <title>CorruptedMC - Minecraft Server</title>
     <meta name="description" content="CorruptedMC, a Minecraft server established in 2012">
     <meta name="author" content="Patrick Bollinger">
+    
+    <script defer src="https://mcapi.us/scripts/minecraft.js"></script>
+    <script>
+      window.addEventListener(
+        'load',
+        function() {
+          MinecraftAPI.getServerQuery(
+            'play.corruptedmc.net',
+            function (err, result) {
+              if (err) {
+                document.getElementById('status').innerHTML = 'Error loading status, Probably Online';
+                document.getElementById('version').innerHTML = 'Error loading version, Probably 1.13.2';
+                return;
+              }
+              document.getElementById('status').innerHTML = result.online ? 'Online' : 'Offline';
+              document.getElementById('version').innerHTML = result.version;
+            }
+          );
+        }
+      );
+      
+    </script>
   </head>
   <body>
     <h1>CorruptedMC</h1>
@@ -41,20 +63,5 @@
       <br>
       Server Established: <em>2011-02-12</em>
     </p>
-    <script src="https://mcapi.us/scripts/minecraft.js"></script>
-    <script>
-      MinecraftAPI.getServerQuery(
-        'play.corruptedmc.net',
-        function (err, result) {
-          if (err) {
-            document.getElementById('status').innerHTML = 'Error loading status, Probably Online';
-            document.getElementById('version').innerHTML = 'Error loading version, Probably 1.13.2';
-            return;
-          }
-          document.getElementById('status').innerHTML = result.online ? 'Online' : 'Offline';
-          document.getElementById('version').innerHTML = result.version;
-        }
-      );
-    </script>
   </body>
 </html>
